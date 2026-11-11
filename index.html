@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Khan Agro Farm: Loan Application</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* CONFIG BLOCK: colors, timing, sizes. Edit values here. */
+:root{--bg:#f6f4ee;--fg:#1d2a22;--mut:#5d6b62;--card:#fff;--ac:#1f7a4d;--ac2:#c98a0a;--bd:#e3dfd2;--warn:#b4532a;--shadow:0 8px 24px rgba(20,40,28,.08);
+--dur:.55s;--stagger:90ms;--dist:18px;--radius:18px;--pad:22px;--maxw:1040px;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1a14;--fg:#eef3ee;--mut:#9db0a3;--card:#18271e;--ac:#4fc58a;--ac2:#f0bf4a;--bd:#2a3d31;--warn:#e68a5c;--shadow:0 8px 24px rgba(0,0,0,.35);color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0f1a14;--fg:#eef3ee;--mut:#9db0a3;--card:#18271e;--ac:#4fc58a;--ac2:#f0bf4a;--bd:#2a3d31;--warn:#e68a5c;--shadow:0 8px 24px rgba(0,0,0,.35);color-scheme:dark}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body{background:var(--bg);color:var(--fg);font-family:"Hind Siliguri","Noto Sans Bengali","Segoe UI",sans-serif;font-size:18px;line-height:1.6;overflow:hidden;text-align:center}
+body::before{content:"";position:fixed;inset:0;background:radial-gradient(900px 500px at 85% -10%,color-mix(in srgb,var(--ac) 18%,transparent),transparent),radial-gradient(700px 400px at -10% 110%,color-mix(in srgb,var(--ac2) 16%,transparent),transparent);pointer-events:none}
+#bar{position:fixed;top:env(safe-area-inset-top,0px);left:0;height:4px;background:linear-gradient(90deg,var(--ac),var(--ac2));width:0;transition:width var(--dur) ease;z-index:5}
+#deck{position:fixed;inset:0;padding-top:env(safe-area-inset-top,0px);padding-bottom:calc(64px + env(safe-area-inset-bottom,0px))}
+.s{position:absolute;inset:0;overflow-y:auto;display:flex;opacity:0;visibility:hidden;transform:translateX(40px);transition:opacity var(--dur) ease,transform var(--dur) ease,visibility 0s var(--dur);padding:28px 20px}
+.s.on{opacity:1;visibility:visible;transform:none;transition:opacity var(--dur) ease,transform var(--dur) ease}
+.w{max-width:var(--maxw);width:100%;margin:auto}
+.k{display:inline-block;color:var(--ac);background:color-mix(in srgb,var(--ac) 12%,transparent);font-weight:700;letter-spacing:.04em;margin:0 0 10px;font-size:14px;padding:4px 14px;border-radius:999px}
+h2{font-size:clamp(26px,4.4vw,44px);line-height:1.25;margin:0 0 6px}
+h2::after{content:"";display:block;width:64px;height:4px;border-radius:4px;background:var(--ac2);margin:14px auto 6px}
+.lead{font-size:clamp(19px,2.4vw,24px);color:var(--mut);margin:12px 0 10px}
+.meta{color:var(--mut);font-size:16px}
+.g{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;margin-top:18px}
+.c{background:var(--card);border:1px solid var(--bd);border-radius:var(--radius);padding:var(--pad);box-shadow:var(--shadow);display:flex;flex-direction:column;align-items:center;gap:6px}
+.c h3{margin:6px 0 0;font-size:19px}.c p{margin:0;color:var(--mut);font-size:16px;line-height:1.55}
+.ic{display:inline-grid;place-items:center;width:48px;height:48px;border-radius:14px;background:color-mix(in srgb,var(--ac) 14%,transparent);color:var(--ac)}
+.ic svg{width:26px;height:26px}
+.row{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin:22px 0}.row .ic{width:60px;height:60px}.row .ic svg{width:32px;height:32px}
+.tw{overflow-x:auto;margin-top:18px;border-radius:var(--radius);box-shadow:var(--shadow)}
+table{border-collapse:collapse;width:100%;min-width:560px;background:var(--card)}
+th,td{padding:14px;text-align:center;border-bottom:1px solid var(--bd);font-size:16px}
+th{background:color-mix(in srgb,var(--ac) 12%,transparent);color:var(--ac)}
+td.v{font-weight:700;font-size:18px}
+.n{margin:18px auto 0;max-width:820px;padding:14px 18px;border:1px solid color-mix(in srgb,var(--ac2) 45%,transparent);background:color-mix(in srgb,var(--ac2) 10%,transparent);border-radius:12px;font-size:15px;color:var(--mut)}
+.tl{list-style:none;margin:18px auto 0;padding:0 0 0 16px;max-width:560px;text-align:left}
+.tl li{padding:2px 0 14px 18px;position:relative}.tl li::before{content:"";position:absolute;left:-12px;top:9px;width:15px;height:15px;border-radius:50%;background:var(--ac)}.tl li:not(:last-child)::after{content:"";position:absolute;left:-6px;top:24px;bottom:-9px;width:3px;background:var(--ac)}
+.tl b{color:var(--ac)}
+nav{position:fixed;left:0;right:0;bottom:0;z-index:6;display:flex;align-items:center;justify-content:center;gap:14px;padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(8px);border-top:1px solid var(--bd)}
+button{font:inherit;cursor:pointer;border:1px solid var(--bd);background:var(--card);color:var(--fg);border-radius:12px;padding:8px 18px;min-height:44px;min-width:44px}
+button:hover{border-color:var(--ac)}
+button:focus-visible{outline:3px solid var(--ac2);outline-offset:2px}
+button:disabled{opacity:.4;cursor:default}
+#ct{min-width:80px;text-align:center;color:var(--mut)}
+.a{opacity:0}
+.s.on .a{animation:up var(--dur) ease both;animation-delay:calc(var(--i,0) * var(--stagger))}
+@keyframes up{from{opacity:0;transform:translateY(var(--dist))}to{opacity:1;transform:none}}
+@media (hover:hover){.c{transition:transform .25s ease,border-color .25s ease}.c:hover{transform:translateY(-4px);border-color:var(--ac)}}
+@media (prefers-reduced-motion:reduce){.s,.s.on,#bar{transition:none}.s.on .a{animation:none;opacity:1}.c{transition:none}}
+</style>
+</head>
+<body>
+<div id="bar"></div>
+<main id="deck" aria-live="polite"></main>
+<nav aria-label="Slide navigation">
+<button id="pv" aria-label="আগের slide">&larr;</button><span id="ct"></span><button id="nx" aria-label="পরের slide">&rarr;</button>
+</nav>
+<script>
+// Icon paths (24x24, stroke style). Separate sub-paths with |
+const P={
+bird:"M16 7h.01|M3.4 18H12a8 8 0 0 0 8-8V7a4 4 0 0 0-7.28-2.3L2 20|m20 7 2 .5-2 .5|M10 18v3|M14 17.75V21|M7 18a6 6 0 0 0 3.84-10.61",
+leaf:"M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z|M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12",
+flame:"M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.07-2.14-.22-4.05 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.15.43-2.29 1-3a2.5 2.5 0 0 0 2.5 2.5z",
+fish:"M6.5 12c1-3.5 5-6 8.5-6s6 2.5 7 6c-1 3.5-3.5 6-7 6s-7.5-2.5-8.5-6Z|M2.5 6.5C5 7 7 9 7 12s-2 5-4.5 5.5c1-2.5 1-8.5 0-11Z|M18 11.5h.01",
+cow:"M4 8l3-3h10l3 3v4a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4Z|M9 12h.01|M15 12h.01|M10 16v3|M14 16v3|M4 8H2|M22 8h-2",
+coin:"M12 2a10 10 0 1 0 0 20 10 10 0 1 0 0-20|M12 6v12|M9 9h4.5a1.5 1.5 0 0 1 0 3h-3a1.5 1.5 0 0 0 0 3H15",
+shield:"M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z|m9 12 2 2 4-4",
+trend:"M3 17l6-6 4 4 8-8|M15 7h6v6",
+build:"M3 21V8l6 4V8l6 4V4h6v17Z|M3 21h18",
+globe:"M12 2a10 10 0 1 0 0 20 10 10 0 1 0 0-20|M2 12h20|M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20",
+clock:"M12 2a10 10 0 1 0 0 20 10 10 0 1 0 0-20|M12 6v6l4 2",
+warn:"M12 3l10 18H2Z|M12 10v4|M12 17h.01",
+target:"M12 2a10 10 0 1 0 0 20 10 10 0 1 0 0-20|M12 6a6 6 0 1 0 0 12 6 6 0 1 0 0-12|M12 10a2 2 0 1 0 0 4 2 2 0 1 0 0-4"
+};
+const ic=n=>`<span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${P[n].split("|").map(d=>`<path d="${d}"/>`).join("")}</svg></span>`;
+const card=(i,h,t,n)=>`<div class="c a" style="--i:${n+2}">${ic(i)}<h3>${h}</h3><p>${t}</p></div>`;
+const grid=l=>`<div class="g">${l.map((x,n)=>card(x[0],x[1],x[2],n)).join("")}</div>`;
+const note=(t,n)=>`<p class="n a" style="--i:${n}">${t}</p>`;
+const tbl=(h,r)=>`<div class="tw a" style="--i:2"><table><thead><tr>${h.map(x=>`<th>${x}</th>`).join("")}</tr></thead><tbody>${r.map(a=>`<tr>${a.map((x,j)=>`<td${j?' class="v"':""}>${x}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`;
+
+// Slide content: [kicker, title, html]
+const S=[
+["Bank Loan Application","Khan Agro Farm",
+`<p class="lead a" style="--i:2">সমন্বিত খামার ও খাদ্য কোম্পানি। Phase-ভিত্তিক বিকাশ পরিকল্পনা, শুরু Contract Poultry দিয়ে।</p><div class="row a" style="--i:3">${ic("bird")}${ic("cow")}${ic("leaf")}${ic("fish")}${ic("flame")}</div><p class="meta a" style="--i:4">উদ্যোক্তা: আরিফুল ইসলাম | ব্যাংক: এখনো নির্ধারিত হয়নি</p>`],
+["মিশন ও ভিশন","আমরা কোথায় যেতে চাই",
+grid([["globe","ভিশন","বিশ্বাসযোগ্য, নিরাপদ খাদ্যের একটি বাংলাদেশি কোম্পানি গড়া, যার পণ্য দেশে পৌঁছাবে এবং ২০৩৭ সালের মধ্যে রপ্তানির লক্ষ্য থাকবে।"],["shield","মিশন ১","ধাপে ধাপে রাসায়নিক কমিয়ে প্রাকৃতিক পদ্ধতিতে নিরাপদ খাদ্য উৎপাদন।"],["build","মিশন ২","স্থানীয় মানুষের কর্মসংস্থান তৈরি এবং আশপাশের কৃষকদের সঙ্গে জ্ঞান ভাগ করা।"],["flame","মিশন ৩","বর্জ্য থেকে জ্বালানি ও সার বানিয়ে খরচ ও পরিবেশের ক্ষতি কমানো।"]])+
+note("রপ্তানি ২০৩৭ সালের লক্ষ্য। Loan-এর ভিত্তি Phase 1-এর আয়।",7)],
+["ব্যবসার মডেল","একটির বর্জ্য আরেকটির সম্পদ",
+grid([["cow","গরু","শুরুতে ২টি, বাছুরে বাড়িয়ে প্রতি বছর ১০-১২টির লক্ষ্য। মাংস ও গোবর।"],["flame","Biogas","গোবর থেকে রান্নার গ্যাস। ভবিষ্যতে আশপাশে Supply।"],["leaf","জৈবসার ও কৃষি","Slurry থেকে সার। পেঁপে, আদা, কলা ও সবজি।"],["bird","মুরগি","শুরুতে Contract Broiler, পরে Sonali।"],["fish","মাছ","পরবর্তী পর্যায়ে।"],["coin","খরচ কমানো","এক Unit-এর বর্জ্য অন্য Unit-এর জ্বালানি বা সার, তাই বাইরে থেকে কেনা কমে।"]])],
+["বাজার","বাজার ও মানুষের চাহিদা",
+grid([["bird","মুরগির চাহিদা বাড়ছে","মাথাপিছু বার্ষিক মুরগি খাওয়া ২০১৬ সালে ছিল ৬.৩ kg। ২০৫০ সালে ৪৫-৫০ kg হওয়ার প্রক্ষেপণ আছে।"],["shield","নিরাপদ খাদ্যের বাজার","দেশের Organic খাদ্যের বাজার ২০২৫ সালে প্রায় ১৪৩ মিলিয়ন ডলার, ২০৩১ সালে ২২৫ মিলিয়ন ডলারের প্রক্ষেপণ।"],["coin","বেশি দিতে ইচ্ছা","শহরের ক্রেতারা নিরাপদ খাদ্যে ২১-৫২% বেশি দিতে রাজি। সনদপ্রাপ্ত Broiler-এ ৩৬.৬৯%।"],["warn","বিশ্বাসের ঘাটতি","দেশীয় বাজারে Organic সনদ বাধ্যতামূলক নয়, তাই ক্রেতার সন্দেহ আছে। যাচাইযোগ্য উৎস দেখানোই সুযোগ।"],["target","স্থানীয় বাজার","আমার এলাকার দাম ও চাহিদা মাঠ জরিপে যাচাই করা বাকি।"]])+
+note("সূত্র: Dhaka Tribune, Future Startup (২০২৫), Orgprints। কিছু সংখ্যা পুরোনো (২০১৬)। Loan জমার আগে হালনাগাদ করা হবে।",8)],
+["Phase 1","Contract Poultry (Kazi Farms)",
+grid([["bird","ধাপে ধাপে","২০০০ মুরগি (২ Batch), তারপর ৪০০০, তারপর ৬০০০। বড় Shed আলাদা আবেদনের অর্থে।"],["clock","Batch","প্রতি Batch ৩২-৩৫ দিন। বছরে প্রায় ৯টি।"],["shield","কোম্পানির দায়িত্ব","Chick, Feed, Medicine, Vaccine ও ডাক্তার Visit কোম্পানি দেয়। আমার খরচ Electricity, Litter ও শ্রমিক।"],["target","কেন আগে","খামার ব্যবস্থাপনা শেখা এবং নিয়মিত আয়ের প্রমাণ তৈরি।"]])+
+note("কোম্পানির প্রকাশিত বক্তব্য অনুযায়ী মুরগি মরলেও জীবিতদের ওজনের ভিত্তিতে Growing Fee পাওয়া যায়। লিখিত চুক্তির শর্ত সংযুক্ত করা হবে।",7)],
+["আয়ের হিসাব","মাসিক গড় Net আয় (Phase 1)",
+tbl(["ধাপ","সর্বনিম্ন ১৬ টাকা/kg","Base ১৮ টাকা/kg"],[["২০০০ মুরগি, শ্রমিক ছাড়া","প্রায় ৩৯ হাজার","প্রায় ৪৪ হাজার"],["৪০০০ মুরগি, ১ Permanent ও ১ Contractual শ্রমিক","প্রায় ৬২ হাজার","প্রায় ৭৩ হাজার"],["৬০০০ মুরগি, ২ জন Permanent শ্রমিক","প্রায় ৮৯ হাজার","প্রায় ১.০৬ লাখ"]])+
+note("ধরা হয়েছে: প্রতি ১০০০ চিকে প্রায় ১,৮৫০ kg বিক্রয়যোগ্য ওজন (অনুমান), বছরে ৯ Batch, Electricity ও Litter ২০০০ মুরগিতে প্রতি Batch-এ ৭,৫০০ টাকা, Permanent শ্রমিক গড়ে ১৩,৫০০ ও Contractual ২,০০০ টাকা মাসে। সর্বনিম্ন ১৬ টাকা/kg উদ্যোক্তার নিশ্চিত তথ্য, লিখিত চুক্তি সংযুক্ত হবে। পরিবারের খরচ ও EMI বাদ।",3)],
+["Phase 2-3","গরু, Sonali, মাছ ও কৃষি",
+grid([["cow","গরু","২টি গরু থেকে ২টি বাছুর। ১২-১৫ মাস পর গরু পালনের অভিজ্ঞতা বুঝে আরও গরু, Poultry-র সঞ্চয় বা নতুন Loan দিয়ে। লক্ষ্য প্রতি বছর ১০-১২টি। হিসাব বাকি।"],["bird","Sonali","৬০০০ পর্যন্ত (Broiler-ও ৬০০০ পর্যন্ত)। হিসাব বাকি।"],["fish","মাছ","হিসাব বাকি।"],["leaf","কৃষি","পেঁপে, আদা, কলা ও সবজি। দীর্ঘমেয়াদি লক্ষ্য ১০০ বিঘা পর্যন্ত। জমির ব্যবস্থা ও হিসাব বাকি।"]])+
+note("এই অংশের আয় Loan পরিশোধের হিসাবে ধরা হয়নি। গরুর বিস্তার ও কৃষির পরিধির অর্থ এই Loan-এর বাইরে, ভবিষ্যৎ আবেদন বা সঞ্চয় থেকে আসবে।",6)],
+["বিনিয়োগ","দুই ধাপে Loan",
+tbl(["খাত","পরিমাণ"],[["২০০০ মুরগির Shed ও Equipment","৫.৫ লাখ"],["একটি নতুন বকনা (গরু)","৬০-৮০ হাজার"],["২টি গরুর এক বছরের খাবার (মাসে ৭ হাজার)","প্রায় ৮৪ হাজার"],["জরুরি তহবিল (৮ লাখ Loan ধরলে)","প্রায় ০.৮৬-১.০৬ লাখ"]])+
+note("সব খাত Loan থেকে ধরা হয়েছে। গরুর খরচ শুধু খাবারের, চিকিৎসা ও অন্যান্য খরচ এতে নেই এবং জরুরি তহবিল থেকে মেটানো হবে। এর বাইরে নিজস্ব অর্থ ৫০-৬০ হাজার। দ্বিতীয় আবেদন: Shed বাড়ানোর Loan, শুরুর Batch-এর প্রকৃত আয়ের প্রমাণসহ, পরিমাণ হিসাব বাকি। জমি ও জামানত ব্যাংকের শর্ত অনুযায়ী।",3)],
+["পরিশোধ","Grace Period ও পরিশোধ",
+tbl(["ধাপ","মাসিক Net (১৬ টাকা)","EMI (কাল্পনিক)","EMI-র পর বাকি (১৬ টাকা)","EMI-র পর বাকি (১৮ টাকা)"],[["৪০০০ মুরগি","প্রায় ৬২ হাজার","প্রায় ১৯.৫ হাজার","প্রায় ৪২.৫ হাজার","প্রায় ৫৩.৫ হাজার"],["৬০০০ মুরগি","প্রায় ৮৯ হাজার","প্রায় ১৯.৫ হাজার","প্রায় ৬৯.৫ হাজার","প্রায় ৮৬.৫ হাজার"]])+
+note("প্রস্তাব: Grace Period ৪-৫ মাস, প্রথম ৪০০০ মুরগির Batch বিক্রির পর থেকে EMI শুরু। ৪০০০ মুরগির Shed তৈরি হওয়া এই সময়সূচির শর্ত। EMI ধরা হয়েছে ৮ লাখ, ৮% Reducing, ৪ বছর, এটা আমার গণনা, ব্যাংকের হার নির্ধারিত নয়। Grace-এর সময়ের সুদ ও মোট মেয়াদ ব্যাংকের শর্তে নির্ধারিত হবে। বাকি টাকা থেকে পরিবারের খরচ (মাসে প্রায় ২০ হাজার) মেটাতে হবে।",3)],
+["ঝুঁকি","ঝুঁকি ও সমাধান",
+grid([["warn","Rate কমে যাওয়া","সর্বনিম্ন ১৬ টাকা/kg ধরেই হিসাব। লিখিত চুক্তি সংযুক্ত হবে।"],["shield","জামানতের জটিলতা","কোম্পানি কী জামানত চায় (Blank Cheque, জমির কাগজ) আগে লিখিতভাবে জেনে ব্যাংকের শর্তের সঙ্গে মিলানো হবে।"],["bird","রোগ ও মৃত্যুহার","কোম্পানির ডাক্তার Visit আছে। Fee জীবিত ওজনের ভিত্তিতে।"],["coin","মূলধনের ঘাটতি","Shed বাড়ানো আলাদা আবেদনে, প্রথম Loan-এর আয়ের প্রমাণসহ।"]])],
+["অবদান","মানুষ ও দেশের জন্য অবদান",
+grid([["build","কর্মসংস্থান","শুরুতে ২ জন Permanent। পুরো প্রকল্প পূর্ণ হলে ৩০-৪০ জন, সম্ভব হলে আরও। পুরো Poultry খাতে প্রায় ৬০ লাখ মানুষের কর্মসংস্থান (২০১৭), ৪০% নারী।"],["bird","সাশ্রয়ী প্রোটিন","বাংলাদেশ মুরগির মাংস খাওয়ায় সবচেয়ে কম দেশগুলোর একটি। উৎপাদন বাড়া মানে সাশ্রয়ী প্রোটিন।"],["shield","নিরাপদ খাদ্য","কীটনাশক ও রাসায়নিকের ঝুঁকি কমিয়ে যাচাইযোগ্য খাদ্য সরবরাহ (লক্ষ্য)।"],["flame","পরিবেশ ও জ্বালানি","গোবর থেকে Biogas, বর্জ্য থেকে জৈবসার। আশপাশে গ্যাস দেওয়ার পরিকল্পনা।"],["leaf","কৃষকদের শেখানো","প্রস্তাবিত: আশপাশের কৃষকদের জৈবসার ও প্রাকৃতিক পদ্ধতি শেখানো।"],["globe","দেশের অর্থনীতি","রপ্তানি শুরু হলে (লক্ষ্য ২০৩৭) বৈদেশিক মুদ্রা আয়ে ভূমিকা।"]])+
+note("লক্ষ্য বা প্রস্তাব চিহ্নিত অংশ এখনো বাস্তবায়িত নয়।",8)],
+["প্রত্যাশিত ফলাফল","সফল হলে যা হবে (৫ বছরের লক্ষ্য)",
+grid([["bird","উৎপাদন","৬০০০ Broiler-এ বছরে ৯ Batch মিলিয়ে প্রায় ১০০ টন জীবিত মুরগি (অনুমান), সঙ্গে ৬০০০ পর্যন্ত Sonali।"],["cow","গরু","২টি দিয়ে শুরু, বাছুরে বাড়িয়ে প্রতি বছর ১০-১২টির লক্ষ্য।"],["trend","আয়","Poultry থেকে মাসিক Net প্রায় ৮৯ হাজার থেকে ১.০৬ লাখ (EMI-র আগে)। গরু, মাছ, কৃষির আয় এতে যোগ হয়নি।"],["build","কর্মী","প্রাথমিকভাবে ৫-৭ জন। পুরো প্রকল্প পূর্ণ হলে ৩০-৪০ জন, সম্ভব হলে আরও।"],["flame","জ্বালানি ও সার","নিজস্ব Biogas ও জৈবসার, বাইরের খরচ কম।"],["target","ঋণ ও বিস্তার","নির্ধারিত সময়ে Loan পরিশোধ, তারপর বিস্তারের ভিত্তি।"]])],
+["Roadmap ও প্রস্তাব","২০৩৭ পর্যন্ত পথ",
+`<ul class="tl a" style="--i:2"><li><b>বছর ১:</b> Contract Poultry, ২০০০ থেকে ৬০০০।</li><li><b>বছর ২-৩:</b> গরু, Biogas, জৈবসার, Sonali, মাছ ও কৃষি।</li><li><b>বছর ৪-৫:</b> উৎপাদন বিস্তার, কর্মী বৃদ্ধি ও কৃষির পরিধি বাড়ানো।</li><li><b>বছর ৭-১০:</b> Brand গড়া ও সরাসরি বিক্রি।</li><li><b>২০৩৭:</b> রপ্তানির লক্ষ্য।</li></ul>`+
+note("প্রস্তাব: ৬-৮ লাখ, ৪-৫ বছর মেয়াদ, Grace Period ৪-৫ মাস, কৃষি ঋণ নীতির আওতায়। Bangladesh Bank-এর Refinance Scheme-এ ব্যাংক অংশ নিলে শেষ ঋণগ্রহীতার সর্বোচ্চ সুদ ৮% এবং Livestock ও Poultry-তে ১ কোটি টাকা পর্যন্ত সীমা। ব্যাংকের কাছে যাচাই বাকি।",3)]
+];
+
+const deck=document.getElementById("deck"),ct=document.getElementById("ct"),bar=document.getElementById("bar"),pv=document.getElementById("pv"),nx=document.getElementById("nx");
+deck.innerHTML=S.map((s,i)=>`<section class="s" id="s${i+1}" aria-label="${s[1]}"><div class="w"><p class="k a">${s[0]}</p><h2 class="a" style="--i:1">${s[1]}</h2>${s[2]}</div></section>`).join("");
+const slides=[...deck.children];
+const bn=n=>n.toLocaleString("bn-BD");
+let cur=-1;
+function go(n,push){
+  n=Math.max(0,Math.min(slides.length-1,n));
+  if(n===cur)return;
+  cur=n;
+  slides.forEach((s,i)=>{s.classList.toggle("on",i===n);s.scrollTop=0});
+  ct.textContent=bn(n+1)+" / "+bn(slides.length);
+  bar.style.width=((n+1)/slides.length*100)+"%";
+  pv.disabled=n===0;nx.disabled=n===slides.length-1;
+  if(push){try{history.replaceState(null,"","#s"+(n+1))}catch(e){}}
+}
+const fromHash=()=>{const m=/^#s(\d+)$/.exec(location.hash);return m?parseInt(m[1],10)-1:0};
+pv.onclick=()=>go(cur-1,true);nx.onclick=()=>go(cur+1,true);
+addEventListener("keydown",e=>{
+  if(["ArrowRight","PageDown"," "].includes(e.key)){e.preventDefault();go(cur+1,true)}
+  else if(["ArrowLeft","PageUp"].includes(e.key)){go(cur-1,true)}
+  else if(e.key==="Home"){go(0,true)}else if(e.key==="End"){go(slides.length-1,true)}
+});
+let x0=null;
+deck.addEventListener("touchstart",e=>{x0=e.touches[0].clientX},{passive:true});
+deck.addEventListener("touchend",e=>{if(x0===null)return;const d=e.changedTouches[0].clientX-x0;if(Math.abs(d)>60)go(cur+(d<0?1:-1),true);x0=null});
+addEventListener("hashchange",()=>go(fromHash(),false));
+go(fromHash(),false);
+</script>
+</body>
+</html>
